@@ -13,7 +13,9 @@ class LinkChecker
 		http_match=uri_string.match(/^http:\/\//)
 		uri_string="http://"+uri_string if http_match.nil?
 
+		
 		uri=URI.parse(uri_string)
+		begin
 		Net::HTTP.start(uri.host,uri.port){|http| 
 			response= http.head(uri.path.size > 0 ? uri.path : "/")
 			rc=response.code.to_i
@@ -21,6 +23,9 @@ class LinkChecker
 				    translate_code(rc))
 			rc
 		}
+		rescue
+			@log.log("Invalid url entered: "+uri_string)
+		end
 	end
 
 	#Could add all error code in the future if they are needed
