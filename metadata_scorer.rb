@@ -24,7 +24,8 @@ class MetadataScorer
 
 	#The default metadata may be overriden but it must be in a single format	# either all symbols or all strings, it must also appear in the form of 	#an array.
 	#+metadata+ is passed in as a hash.	
-	def initialize(metadata,required_metadata=DEFAULT_METADATA)
+	def initialize(mode,metadata,required_metadata=DEFAULT_METADATA)
+		@logger=Logger.new(mode,"metadata_scorer")
 		@metadata=metadata
 		@required_metadata=required_metadata
 		@score=0
@@ -50,7 +51,7 @@ class MetadataScorer
 				symbol_score+=1 if metadata[@required_metadata[x].intern]
 			end
 		rescue
-			#TODO:add error logging
+			@logger.log("Error while symbolizing: "+$!
 		end
 
 		symbol_score

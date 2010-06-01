@@ -1,10 +1,12 @@
 require 'output'
 class Logger
-	def initialize(mode)
+	def initialize(mode,filename)
 		if mode=="production"
-			@output_file=Output.file '/log/production.log'
+			@output_file=Output.file '/log/'+filename+
+			'_production.log'
 		else
-			@output_file=Output.file '/log/test.log'
+			@output_file=Output.file '/log/'+filename+
+			'_test.log'
 		end
 	end
 

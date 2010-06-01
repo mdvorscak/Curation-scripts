@@ -4,7 +4,7 @@ require File.dirname(__FILE__)+ '/logger'
 class LinkChecker
 
 	def initialize(mode="production")
-		@log=Logger.new(mode)
+		@log=Logger.new(mode,"link_checker")
 	end
 
 	def response_code(uri_string)
